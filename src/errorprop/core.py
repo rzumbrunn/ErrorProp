@@ -6,7 +6,7 @@ from collections.abc import Iterable
 import sympy as sy
 
 
-def error_propagation(function, input_variables, uncorrelated=False):
+def error_propagation(function, input_variables, uncorrelated=False, print_messages=True):
     """
     error_propagation Given a function, and it's variables, computes the propagated error with respect to the input variables
 
@@ -34,7 +34,8 @@ def error_propagation(function, input_variables, uncorrelated=False):
 
     jacobian = function.jacobian(input_variables)
     propagated_error = jacobian * input_covariance_matrix_symbols * jacobian.T
-
+    if print_messages:
+        print("Error, J, input covariance symbols")
     return propagated_error, jacobian, input_covariance_matrix_symbols
 
 
